@@ -1,5 +1,10 @@
 <?php
-
+require_once ("import_edefakt.php");
+/**
+ * @var $import_handler
+ */
+$import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un");
+//$debug_php = $import_handler->prepare_for_db();
 
 ?>
 
@@ -35,13 +40,16 @@
 <!-- <span style="width: 100%" class="badge bg-gradient-success" size="200px"><?//=$server_info?></span>
 <br>
 -->
-
 <div class="alert alert-info" role="alert">
-    <p><strong>Debug Ausgabe</strong></p>
+    <p><strong>Debug Ausgabe Javascript</strong></p>
     <p id="pDebug"></p>
 </div>
+<div class="alert alert-info" role="alert">
+    <p><strong><?//=var_dump($debug_php)?></strong></p>
+    <p id="pDebugPHP"></p>
+</div>
 
-<div class="container-fluid py-4">
+<div class="container-fluid py-4">            <!--Dashboard-->
     <div class="row">
         <div class="col-sm-4">
             <div class="card">
@@ -61,7 +69,7 @@
         <div class="col-sm-4 mt-sm-0 mt-4">
             <div class="card">
                 <div class="card-body p-3 position-relative">
-                    <button id="btnAkt" type="button" class="btn btn-danger btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Tooltip">
+                    <button id="btnAkt2" type="button" class="btn btn-danger btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Tooltip">
                         <i class="material-icons-round">Irgendetwas anderes</i>
                 </div>
             </div>
@@ -168,6 +176,12 @@
     <tbody>
     </tbody>
 </table>
+
+<div class="container">
+    <div class="btn"><a href="#">Krankenhäuser</a></div>
+    <div class="btn"><a href="#">Hilfsmitter</a></div>
+    <div class="btn"><a href="#">Heilmittel</a></div>
+</div>
 
 
 <!-------------END CONTENT--------------------------------------------------------------------------------------------->

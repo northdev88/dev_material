@@ -11,7 +11,17 @@ btn_refresh.addEventListener('click', async function (){
     if (response2.ok) {
         let result = await response2.json();
         console.log(result);
-        document.getElementById("pDebug").innerText = result[1].rechnung_nr + " " + result[1].rechnung_datum;
+        document.getElementById("pDebug").innerText = result;
+    }
+})
+
+const btn2_refresh = document.getElementById("btnAkt2");
+btn2_refresh.addEventListener('click', async function (){
+    let response = await fetch("dataport.php?param=kassen_kz");
+    if (response.ok) {
+        let result = await response.json();
+        console.log(result);
+        document.getElementById("pDebug").innerText = result;
     }
 })
 
@@ -24,35 +34,5 @@ function fill_kopfelemente(result) {
     document.getElementById("tdAnw").innerText = result.anwendungsreferenz;
     document.getElementById("tdTest").innerText = result.testindikator;
     document.getElementById("tdAnzUNH").innerText = result.anzahl_unh;
-
-   let data =
-       [
-        {
-            "name":       "Tiger Nixon",
-            "position":   "System Architect",
-            "salary":     "$3,120",
-            "start_date": "2011/04/25",
-            "office":     "Edinburgh",
-            "extn":       "5421"
-        },
-        {
-            "name":       "Garrett Winters",
-            "position":   "Director",
-            "salary":     "$5,300",
-            "start_date": "2011/07/25",
-            "office":     "Edinburgh",
-            "extn":       "8422"
-        }
-    ]
-    $("#devtable").DataTable({
-        data: data,
-        columns: [
-            {data: 'name'},
-            {data: 'position'},
-            {data: 'salary'},
-            {data: 'extn'},
-        ]
-    });
-
 }
 

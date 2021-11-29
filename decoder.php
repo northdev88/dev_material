@@ -7,40 +7,67 @@ class decoder
 {
     private $handler;
     private $helper;
+    private $CONFIG;
 
-    public function __construct($path) {
+    public function __construct($rechnungsnummer) {
 
-        $this->handler = file($path);
         $this->helper = new helper();
         $this->logger = new logger();
+        $this->CONFIG = require_once("config.inc.php");
+        $this->handler = file($this->get_ESOL($rechnungsnummer));
     }
 
 
-    public function get_ESOL($rechnungsnummer)
+    public function get_ESOL($rn)
     {
-        $rechnungsnummer =trim($rechnungsnummer);
-        $month = substr($rechnungsnummer, 1,2);
-        $year = substr($rechnungsnummer, -2);
-        return $rechnungsnummer . ' ' . $month . " $year";
-    }
-
-    public function get_unter_rechnungen() : array
-    {
-        $unter_rechnungen[] = array();
-        $cnt = 0;
-        foreach ($this->handler as $segment) {
-            $segment = explode("+", $segment);
-            if($segment[0] == "REC")
-            {
-                $unter_rechnungen[] = array_merge($unter_rechnungen[$cnt], array(
-                   "rechnung_nr"        => $segment[1],
-                   "rechnung_datum"     => $segment[2]
-                ));
-                $cnt++;
+        $rechnungsnummer = explode('-', $rn);
+        $month = substr($rechnungsnummer[0], -2);
+        $year  = $rechnungsnummer[2];
+        $kassen_kz = $this->get_arzw_kasse_kz($rechnungsnummer[1]);
+        switch ($kassen_kz) {
+            case 29:
+                $path_esol = $this->CONFIG['dta302_aok'] . "/" . $year . $month . "*/*.un";
+                break;
+            case '2c':
+                $path_esol = $this->CONFIG['dta302_aok'] . "/" . $year . $month . "*/*.un";
+                break;
+            default:
+                exit("Pfad zur ESOL konnte anhand der Kassennummer nicht ermittelt werden");
+        }
+        foreach (glob($path_esol) as $files) {
+            $file = file($files);
+            foreach ($file as $segment) {
+                $segment = explode("+", $segment);
+                if($segment[0] == "REC")
+                {
+                    $search = explode(':', $segment[1]);
+                    if ($search[0] == $rn) {
+                        return realpath($files);
+                    }
+                    else continue;
+                }
             }
         }
-        return $unter_rechnungen;
+
+        exit('Rechnungsnummer nicht gefunden');
     }
+
+    public function get_arzw_kasse_kz($kasse) {
+        $kasse = substr($kasse, 0,6);
+        $dbase_handler = dbase_open($this->CONFIG['path_kasse_dbf'], 0);
+        $cnt = 0;
+        $size = dbase_numrecords($dbase_handler);
+
+        while ($cnt < $size) {
+            $cnt++;
+            $row = dbase_get_record_with_names($dbase_handler, $cnt);
+            if($row['KASSE'] == $kasse) {
+                return trim($row['IKS']);
+            }
+        }
+        return '';
+    }
+
 
     public function edifact_kopfelemente() : array
     {
@@ -104,4 +131,47 @@ class decoder
 
         return $actk;
     }
+
+    public function get_patient_data($patient_number) {
+        $patient_data = array();
+        $match = false;
+        $cnt_patient = 0;
+        $cnt_taxe = 0;
+        foreach ($this->handler as $segment_key => $segment)
+        {
+            $segment = explode('+', $segment);
+            if ($segment[0] == 'INV')
+            {
+                if (trim($segment[1]) == trim($patient_number)) {
+                    $match = true;
+                    $cnt_patient++;
+                    $patient_data = array_merge($patient_data, array(
+                        'vers_nr' => $segment[1],
+                        'status' => $segment[2]
+                    ));
+                }
+            }
+            if (trim($segment[0] == 'EHE') && $match == true) {
+                $cnt_taxe++;
+                echo $segment[1] . PHP_EOL;
+                array_push($patient_data, array(
+                    'actk'          => $segment[1],
+                    'pzn'           => $segment[2],
+                    'faktor'        => $segment[3],
+                    'preis'         => $segment[4],
+                    'datum'         => $segment[5],
+                    'zuzahlung'     => $segment[6]
+                ));
+            }
+            if (trim($segment[0] == 'BES') && $match == true) {
+                $match = false;
+            }
+        }
+
+        return $patient_data;
+    }
 }
+
+$decoder_handler    = new decoder('N04-9000501-21');
+print_r($decoder_handler ->edifact_kopfelemente());
+print_r($decoder_handler->get_patient_data('B011178306'));
