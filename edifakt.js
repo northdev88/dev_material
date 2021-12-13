@@ -96,4 +96,3 @@ function visible_button(result) {
         });
     }
 }
-
