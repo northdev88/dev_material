@@ -107,6 +107,8 @@ class decoder
                 if (trim($segment[1]) == trim($patient_number)) {
                     $match = true;
                     $patient_data = array();
+                    $taxen_data = array();
+                    $data['taxen'][$cnt_patient] = array();
                     $cnt_patient++;
                     $patient_data = array_merge($patient_data, array(
                         'verornung' => $cnt_patient,
@@ -130,8 +132,7 @@ class decoder
 
             if (trim($segment[0] == 'EHE') && $match == true) {
                 $cnt_taxe++;
-                $data['taxen'][$cnt_taxe] = array();
-                array_push($data['taxen'], array(
+                $taxen_data = array_merge($taxen_data, array(
                     'taxe_nr'       => $cnt_taxe,
                     'pzn'           => $segment[2],
                     'faktor'        => $segment[3],
@@ -140,6 +141,8 @@ class decoder
                     'actk'          => $segment[1],
                     'datum'         => $segment[5]
                 ));
+                array_push($data['taxen'][$cnt_patient - 1], $taxen_data);
+
             }
             if (trim($segment[0] == 'BES') && $match == true) {
                 $match = false;
@@ -151,6 +154,7 @@ class decoder
     }
 }
 
-$decoder_handler    = new decoder($_GET['rechnungsnr']);
-echo json_encode($decoder_handler->get_patient_data($_GET['$decoder_handler    = new decoder($_GET['rechnungsnr']);
-    echo json_encode($decoder_handler->get_patient_data($_GET['versnr']));']));
+//$decoder_handler    = new decoder('juckt keinen da Debug Modus');
+//print_r($decoder_handler->get_patient_data('D490545437'));
+//print_r($decoder_handler->get_patient_data('D490545437'));
+//echo json_encode($decoder_handler->get_patient_data('D490545437'));

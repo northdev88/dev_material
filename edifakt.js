@@ -47,7 +47,9 @@ function visible_button(result) {
             $("#tablePatient").find("tr:gt(0)").remove();
             $("#tableTaxen").find("tr:gt(0)").remove();
             create_row(result.patient_data[0], "tablePatient", 1);
-            create_row(result.taxen[0], "tableTaxen", 1);
+            for (let n=0; n<result.taxen[0].length;n++) {
+                create_row(result.taxen[0][n], "tableTaxen", n + 1);
+            }
         });
     }
     if (document.getElementById("btnVerordnung2").hidden === false) {
@@ -55,7 +57,9 @@ function visible_button(result) {
             $("#tablePatient").find("tr:gt(0)").remove();
             $("#tableTaxen").find("tr:gt(0)").remove();
             create_row(result.patient_data[1], "tablePatient", 1);
-            create_row(result.taxen[1], "tableTaxen", 1);
+            for (let n=0; n<result.taxen[1].length;n++) {
+                create_row(result.taxen[1][n], "tableTaxen", n + 1);
+            }
         });
     }
     if (document.getElementById("btnVerordnung3").hidden === false) {
@@ -63,7 +67,9 @@ function visible_button(result) {
             $("#tablePatient").find("tr:gt(0)").remove();
             $("#tableTaxen").find("tr:gt(0)").remove();
             create_row(result.patient_data[2], "tablePatient", 1);
-            create_row(result.taxen[2], "tableTaxen", 1);
+            for (let n=0; n<result.taxen[2].length;n++) {
+                create_row(result.taxen[2][n], "tableTaxen", n + 1);
+            }
         });
     }
     if (document.getElementById("btnVerordnung4").hidden === false) {
@@ -71,7 +77,9 @@ function visible_button(result) {
             $("#tablePatient").find("tr:gt(0)").remove();
             $("#tableTaxen").find("tr:gt(0)").remove();
             create_row(result.patient_data[3], "tablePatient", 1);
-            create_row(result.taxen[3], "tableTaxen", 1);
+            for (let n=0; n<result.taxen[3].length;n++) {
+                create_row(result.taxen[3][n], "tableTaxen", n + 1);
+            }
         });
     }
 }
