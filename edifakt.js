@@ -8,20 +8,12 @@ const btn_verordnung6 = document.getElementById("btnVerordnung6");
 const clog = console.log;
 const $$ = document.getElementById;
 const btnRNr = document.getElementById("rechnungs_nr");
-const validate_rnr =document.getElementById("rechnungs_nr");
 
-
-validate_rnr.onblur = function () {
-    clog(validate_rnr);
-    alert("da tut sich was");
-}
-
-btn_refresh.addEventListener('click', async function (){
+document.getElementById("formPatientData").onsubmit = async function (event) {
+    event.preventDefault();
     let data = new FormData();
     data.append("rechnungs_nr", document.querySelector("#rechnungs_nr").value);
     data.append("vnr", document.querySelector("#vnr").value);
-    //Validierung einfügen
-    //Testparameter N04-9000501-21, B011178306, D490545437(debug)
     let response_patient = await fetch("dataport.php?mode=patient_data&rechnungsnr=" + data.get('rechnungs_nr') + "&versnr=" + data.get('vnr'));
     if (response_patient.ok) {
         let result = await response_patient.json();
@@ -29,7 +21,8 @@ btn_refresh.addEventListener('click', async function (){
         create_row(result.header, "tableHeader", 1);
         visible_button(result);
     }
-});
+}
+
 
 function create_row(output, outputTable, row_index) {
     let table = document.getElementById(outputTable);
@@ -43,11 +36,25 @@ function create_row(output, outputTable, row_index) {
     }
 }
 
+
+function create_button(anzahl) {
+    for (let n = 0; n < anzahl; n++) {
+
+    }
+    var newDiv = document.createElement("button");
+    newDiv.className = "btn btn-primary";
+    var newContent = document.createTextNode("Hi there and greetings!");
+    newDiv.appendChild(newContent); // füge den Textknoten zum neu erstellten div hinzu.
+
+    // füge das neu erstellte Element und seinen Inhalt ins DOM ein
+    var currentDiv = document.getElementById("insertBtn");
+    document.body.insertBefore(newDiv, currentDiv);
+}
+
 function visible_button(result) {
     for (let n=0; n<result.patient_data.length; n++ ) {
         document.getElementById("btnVerordnung" + (n+1)).hidden = false;
     }
-    clog(result);
     if (document.getElementById("btnVerordnung1").hidden === false) {
         btn_verordnung1.addEventListener('click', async function (){
             $("#tablePatient").find("tr:gt(0)").remove();
@@ -90,16 +97,3 @@ function visible_button(result) {
     }
 }
 
-function create_button(anzahl) {
-    for (let n = 0; n < anzahl; n++) {
-
-    }
-    var newDiv = document.createElement("button");
-    newDiv.className = "btn btn-primary";
-    var newContent = document.createTextNode("Hi there and greetings!");
-    newDiv.appendChild(newContent); // füge den Textknoten zum neu erstellten div hinzu.
-
-    // füge das neu erstellte Element und seinen Inhalt ins DOM ein
-    var currentDiv = document.getElementById("insertBtn");
-    document.body.insertBefore(newDiv, currentDiv);
-}

@@ -41,7 +41,7 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
 <!-- <span style="width: 100%" class="badge bg-gradient-success" size="200px"><?//=$server_info?></span>
 <br>
 -->
-<div class="alert alert-warning" role="alert">
+<div class="alert alert-warning" role="alert" hidden="true">
     <p><strong>Debug Ausgabe Javascript</strong></p>
     <p id="pDebug"></p>
 </div>
@@ -55,7 +55,7 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
                 <div class="card-body p-3 position-relative">
                     <div class="input-group input-group-outline my-3">
                         <label class="form-label">Rechnungsnummer</label>
-                        <input  name="rechnungs_nr" id="rechnungs_nr" type="text" class="form-control" autofocus form="formPatientData" required>
+                        <input  name="rechnungs_nr" id="rechnungs_nr" type="text" class="form-control" autofocus form="formPatientData" minlength="4" required>
                     </div>
                 </div>
             </div>
@@ -73,7 +73,7 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
         <div class="col-sm-4 mt-sm-0 mt-4">
             <div class="card">
                 <div class="card-body p-3 position-relative">
-                    <button id="btnSearchPatienData" type="button" class="btn btn-primary btn-lg w-100">Suche beginnen</button>
+                    <button id="btnSearchPatienData" type="submit" class="btn btn-primary btn-lg w-100">Suche beginnen</button>
                 </div>
             </div>
         </div>
@@ -85,7 +85,7 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
                 <div class="card-header pb-0 p-3">
                     <!--CARD HEADER!-->
                     <div class="d-flex justify-content-between">
-                        <h6 class="mb-0">Auswahl der Verordnung</h6>
+                        <h6 class="text-primary text-gradient mb-0">Auswahl der Verordnung</h6>
                         </button>
                     </div>
                 </div>
@@ -108,7 +108,7 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
             <div class="card">
                 <div class="card-header pb-0 p-3">
                     <div class="d-flex justify-content-between">
-                        <h6 class="mb-0">Übersicht Kopfelement UNB / UNZ</h6>
+                        <h6 class="text-primary text-gradient mb-0">Übersicht Kopfelement UNB / UNZ</h6>
                     </div>
                 </div>
                 <div class="card-body p-3">
@@ -138,7 +138,7 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
             <div class="card h-100">
                 <div class="card-header pb-0 p-3">
                     <div class="d-flex justify-content-between">
-                        <h6>Übersicht der Patientendaten</h6>
+                        <h6 class="text-primary text-gradient mb-0">Übersicht der Patientendaten</h6>
                     </div>
                 </div>
                 <div class="card-body p-3">
@@ -168,7 +168,7 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
             <div class="card">
                 <div class="card-header pb-0 p-3">
                     <div class="d-flex justify-content-between">
-                        <h6>Übersicht der Taxen</h6>
+                        <h6 class="text-primary text-gradient mb-0">Übersicht der Taxen</h6>
                     </div>
                 </div>
                 <div class="card-body p-3">
@@ -196,6 +196,32 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
             <div class="card mb-4">
                 <div class="card-header pb-0">
                 <div class="card-body px-0 pt-0 pb-2">
+                    <div class="row">
+                        <div class="col-lg-3 col-6 text-center">
+                            <div class="border border-light border-1 border-radius-md py-3">
+                                <h6 class="text-primary text-gradient mb-0">Name, Vorname</h6>
+                                <h4 class="font-weight-bolder"><span class="small">$ </span><span id="state1" countTo="23980"></span></h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6 text-center">
+                            <div class="border border-light border-1 border-radius-md py-3">
+                                <h6 class="text-primary text-gradient mb-0">Versichertennummer</h6>
+                                <h4 class="font-weight-bolder"><span class="small">$ </span><span id="state2" countTo="2400"></span></h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6 text-center mt-4 mt-lg-0">
+                            <div class="border border-light border-1 border-radius-md py-3">
+                                <h6 class="text-primary text-gradient mb-0">Avg. Value</h6>
+                                <h4 class="font-weight-bolder"><span class="small">$ </span><span id="state3" countTo="48"></span></h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6 text-center mt-4 mt-lg-0">
+                            <div class="border border-light border-1 border-radius-md py-3">
+                                <h6 class="text-primary text-gradient mb-0">Refund Rate</h6>
+                                <h4 class="font-weight-bolder"><span id="state4" countTo="4"></span><span class="small"> %</span></h4>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
