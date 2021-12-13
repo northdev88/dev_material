@@ -92,7 +92,7 @@ class decoder
                     "datenaustauschreferenz"    =>  $segment[5], //analog Segment[2] in UNZ
                     "leistungsbereich"          =>  $segment[6],
                     "anwendungsreferenz"        =>  $segment[7],
-                    "testindikator"             =>  $segment[8]
+                    "testindikator"             =>  substr($segment[8], 0, -3)
                 ));
             }
             //Schlusselement UNZ
@@ -124,7 +124,7 @@ class decoder
                     'geburtsdatum'      => $segment[3],
                     'strasse'           => $segment[4],
                     'plz'               => $segment[5],
-                    'ort'               => $segment[6]
+                    'ort'               => substr($segment[6], 0, -3)
                 ));
 
                 array_push($data['patient_data'], $patient_data);
@@ -137,7 +137,7 @@ class decoder
                     'pzn'           => $segment[2],
                     'faktor'        => $segment[3],
                     'preis'         => $segment[4],
-                    'zuzahlung'     => $segment[6],
+                    'zuzahlung'     => substr($segment[6], 0, -3),
                     'actk'          => $segment[1],
                     'datum'         => $segment[5]
                 ));

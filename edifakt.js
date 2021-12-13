@@ -8,7 +8,13 @@ const btn_verordnung6 = document.getElementById("btnVerordnung6");
 const clog = console.log;
 const $$ = document.getElementById;
 const btnRNr = document.getElementById("rechnungs_nr");
+const validate_rnr =document.getElementById("rechnungs_nr");
 
+
+validate_rnr.onblur = function () {
+    clog(validate_rnr);
+    alert("da tut sich was");
+}
 
 btn_refresh.addEventListener('click', async function (){
     let data = new FormData();
