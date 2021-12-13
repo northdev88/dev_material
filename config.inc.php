@@ -1,6 +1,6 @@
 <?php
 
-return array(
+$GLOBALS['config'] = array(
 
     'database' => array(
 
@@ -10,6 +10,7 @@ return array(
         'dbname'    => 'arznet',
 
     ),
+    'path_test_esol'        => '/home/norman/Schreibtisch/ESOL0811_short.un',
     'path_new_data'         => '/mnt/new-data',
     'path_kasse_dbf'        => '/home/norman/Schreibtisch/tmp/kasse.DBF',
     'dta302_aok'            => '/mnt/new-data/phyorg/Dtaust/§302HEILMI/aok',

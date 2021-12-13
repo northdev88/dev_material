@@ -29,7 +29,8 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
     <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="./assets/css/material-dashboard.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+
 
 </head>
 
@@ -40,53 +41,63 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
 <!-- <span style="width: 100%" class="badge bg-gradient-success" size="200px"><?//=$server_info?></span>
 <br>
 -->
-<div class="alert alert-info" role="alert">
+<div class="alert alert-warning" role="alert">
     <p><strong>Debug Ausgabe Javascript</strong></p>
     <p id="pDebug"></p>
 </div>
-<div class="alert alert-info" role="alert">
-    <p><strong><?//=var_dump($debug_php)?></strong></p>
-    <p id="pDebugPHP"></p>
-</div>
 
-<div class="container-fluid py-4">            <!--Dashboard-->
-    <div class="row">
+
+<div id="divHead" class="container-fluid py-4">                <!--Dashboard-->
+    <form id="formPatientData" name="formPatientData">
+        <div class="row">
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body p-3 position-relative">
-                    <button id="btnAkt" type="button" class="btn btn-success btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Tooltip">
-                        <i class="material-icons-round">Aktualisieren</i>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4 mt-sm-0 mt-4">
-            <div class="card">
-                <div class="card-body p-3 position-relative   btn-success opacity-5 rounded-3">
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    <div class="input-group input-group-outline my-3">
+                        <label class="form-label">Rechnungsnummer</label>
+                        <input  name="rechnungs_nr" id="rechnungs_nr" type="text" class="form-control" autofocus form="formPatientData" required>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-sm-4 mt-sm-0 mt-4">
             <div class="card">
                 <div class="card-body p-3 position-relative">
-                    <button id="btnAkt2" type="button" class="btn btn-danger btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Tooltip">
-                        <i class="material-icons-round">Irgendetwas anderes</i>
+                    <div class="input-group input-group-outline my-3">
+                        <label class="form-label">Versichertennummer</label>
+                        <input name="vnr" id="vnr" type="text" class="form-control" form="formPatientData" value="D490545437" required>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>                      <!--ROW mit Buttons-->
+        <div class="col-sm-4 mt-sm-0 mt-4">
+            <div class="card">
+                <div class="card-body p-3 position-relative">
+                    <button id="btnSearchPatienData" type="button" class="btn btn-primary btn-lg w-100">Suche beginnen</button>
+                </div>
+            </div>
+        </div>
+    </div>                          <!--ROW mit Buttons-->
+    </form>
     <div class="row mt-4">
         <div class="col-lg-4 col-sm-6">
             <div class="card h-100">
                 <div class="card-header pb-0 p-3">
                     <!--CARD HEADER!-->
                     <div class="d-flex justify-content-between">
-                        <h6 class="mb-0">Enthaltene Unter-Rechnungen</h6>
+                        <h6 class="mb-0">Auswahl der Verordnung</h6>
                         </button>
                     </div>
                 </div>
                 <div class="card-body pb-0 p-3 mt-4">
-                    <!-- CARD BODY-->
+                    <div id="insertBtn" class="text-center">
+                        <button id="btnVerordnung1" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 1</button>
+                        <button id="btnVerordnung2" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 2</button>
+                        <button id="btnVerordnung3" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 3</button>
+                        <button id="btnVerordnung4" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 4</button>
+                        <button id="btnVerordnung5" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 5</button>
+                        <button id="btnVerordnung6" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 6</button>
+                    </div>
                 </div>
                 <div class="card-footer pt-0 pb-0 p-3 d-flex align-items-center">
                     <!-- CARD FOOTER-->
@@ -98,12 +109,11 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
                 <div class="card-header pb-0 p-3">
                     <div class="d-flex justify-content-between">
                         <h6 class="mb-0">Übersicht Kopfelement UNB / UNZ</h6>
-                        </button>
                     </div>
                 </div>
                 <div class="card-body p-3">
                     <div class="table-responsive">
-                        <table class="table align-items-center mb-0">
+                        <table class="table align-items-center mb-0" id="tableHeader">
                             <thead>
                             <tr>
                                 <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">IK Absender</th>
@@ -113,52 +123,74 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
                                 <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Leistungsbereich</th>
                                 <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Anwendungsreferenz</th>
                                 <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Testindikator</th>
-                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Anzahl UNH</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th id="tdIkAbsender" scope="row" class="text-lg-center"></th>
-                                <td id="tdIKEmpf" scope="row" class="text-lg-center"></h6></td>
-                                <td id="tdZeit" scope="row" class="text-lg-center"></td>
-                                <td id="tdRef" scope="row" class="text-lg-center"></td>
-                                <td id="tdLeistung"scope="row" class="text-lg-center"></td>
-                                <td id="tdAnw" scope="row" class="text-lg-center"></td>
-                                <td id="tdTest" scope="row" class="text-lg-center"></td>
-                                <td id="tdAnzUNH" scope="row" class="text-lg-center"></td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-    </div>                 <!--ROW mit Rechnungsübersicht und Kopfelemente-->
+    </div>                     <!--ROW mit Rechnungsübersicht und Kopfelemente-->
     <div class="row mt-4">
-        <div class="col-lg-8">
+        <div class="col-lg-6">
             <div class="card h-100">
                 <div class="card-header pb-0 p-3">
                     <div class="d-flex justify-content-between">
-
+                        <h6>Übersicht der Patientendaten</h6>
                     </div>
                 </div>
                 <div class="card-body p-3">
-
+                    <div class="table-responsive d-flex justify-content-between">
+                        <table class="table align-items-center mb-0" id="tablePatient">
+                            <thead>
+                            <tr>
+                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Verordnung Nr.</th>
+                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Versichertennummer</th>
+                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Status</th>
+                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Nachname</th>
+                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Vorname</th>
+                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Geburtsdatum</th>
+                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Straße</th>
+                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">PLZ</th>
+                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Ort</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 mt-lg-0 mt-4">
+        <div class="col-lg-6 mt-lg-0 mt-4">
             <div class="card">
                 <div class="card-header pb-0 p-3">
                     <div class="d-flex justify-content-between">
+                        <h6>Übersicht der Taxen</h6>
                     </div>
                 </div>
                 <div class="card-body p-3">
-
+                    <table class="table align-items-center mb-0" id="tableTaxen">
+                        <thead>
+                        <tr>
+                            <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Taxe Nr.</th>
+                            <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Positionsnummer</th>
+                            <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Faktor</th>
+                            <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Preis / €</th>
+                            <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Zuzahlung / €</th>
+                            <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">AC : TK</th>
+                            <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Behandlungsdatum</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </div>
+    </div>                     <!--ROW mit Patientendaten-->
     <div class="row mt-4">
         <div class="col-12">
             <div class="card mb-4">
@@ -170,18 +202,8 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
     </div>
 </div>
 </div>
-<table id="devtable" class="table-bordered" style="width: 100%">
-    <thead>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
 
-<div class="container">
-    <div class="btn"><a href="#">Krankenhäuser</a></div>
-    <div class="btn"><a href="#">Hilfsmitter</a></div>
-    <div class="btn"><a href="#">Heilmittel</a></div>
-</div>
+
 
 
 <!-------------END CONTENT--------------------------------------------------------------------------------------------->
@@ -199,7 +221,7 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="/assets/js/material-dashboard.min.js"></script>
 <script src="edifakt.js"></script>
-<script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 </body>
 
 </html>
