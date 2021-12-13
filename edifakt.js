@@ -20,6 +20,7 @@ document.getElementById("formPatientData").onsubmit = async function (event) {
         $("#tableHeader").find("tr:gt(0)").remove();
         create_row(result.header, "tableHeader", 1);
         visible_button(result);
+        document.getElementById("rowVerordnung").hidden = false;
     }
 }
 
@@ -59,40 +60,68 @@ function visible_button(result) {
         btn_verordnung1.addEventListener('click', async function (){
             $("#tablePatient").find("tr:gt(0)").remove();
             $("#tableTaxen").find("tr:gt(0)").remove();
-            create_row(result.patient_data[0], "tablePatient", 1);
+            document.getElementById("patientName").innerHTML = result.patient_data[0].nachname + ", " + result.patient_data[0].vorname;
+            document.getElementById("patientVers").innerHTML = result.patient_data[0].vers_nr;
+            document.getElementById("patientStatus").innerHTML = result.patient_data[0].status + ", " + result.patient_data[0].vorname;
+            document.getElementById("patientGeb").innerHTML = result.patient_data[0].geburtsdatum;
+            document.getElementById("patientStr").innerHTML = result.patient_data[0].strasse;
+            document.getElementById("patientOrt").innerHTML = result.patient_data[0].plz + "  " + result.patient_data[0].ort;
             for (let n=0; n<result.taxen[0].length;n++) {
                 create_row(result.taxen[0][n], "tableTaxen", n + 1);
             }
+            document.getElementById("rowPatient").hidden = false;
+            document.getElementById("rowTaxen").hidden = false;
         });
     }
     if (document.getElementById("btnVerordnung2").hidden === false) {
         btn_verordnung2.addEventListener('click', async function (){
             $("#tablePatient").find("tr:gt(0)").remove();
             $("#tableTaxen").find("tr:gt(0)").remove();
-            create_row(result.patient_data[1], "tablePatient", 1);
+            document.getElementById("patientName").innerHTML = result.patient_data[1].nachname + ", " + result.patient_data[1].vorname;
+            document.getElementById("patientVers").innerHTML = result.patient_data[1].vers_nr;
+            document.getElementById("patientStatus").innerHTML = result.patient_data[1].status + ", " + result.patient_data[1].vorname;
+            document.getElementById("patientGeb").innerHTML = result.patient_data[1].geburtsdatum;
+            document.getElementById("patientStr").innerHTML = result.patient_data[1].strasse;
+            document.getElementById("patientOrt").innerHTML = result.patient_data[1].plz + "  " + result.patient_data[0].ort;
             for (let n=0; n<result.taxen[1].length;n++) {
                 create_row(result.taxen[1][n], "tableTaxen", n + 1);
             }
+            document.getElementById("rowPatient").hidden = false;
+            document.getElementById("rowTaxen").hidden = false;
         });
     }
     if (document.getElementById("btnVerordnung3").hidden === false) {
         btn_verordnung3.addEventListener('click', async function (){
             $("#tablePatient").find("tr:gt(0)").remove();
             $("#tableTaxen").find("tr:gt(0)").remove();
-            create_row(result.patient_data[2], "tablePatient", 1);
+            document.getElementById("patientName").innerHTML = result.patient_data[2].nachname + ", " + result.patient_data[2].vorname;
+            document.getElementById("patientVers").innerHTML = result.patient_data[2].vers_nr;
+            document.getElementById("patientStatus").innerHTML = result.patient_data[2].status + ", " + result.patient_data[2].vorname;
+            document.getElementById("patientGeb").innerHTML = result.patient_data[2].geburtsdatum;
+            document.getElementById("patientStr").innerHTML = result.patient_data[2].strasse;
+            document.getElementById("patientOrt").innerHTML = result.patient_data[2].plz + "  " + result.patient_data[2].ort;
             for (let n=0; n<result.taxen[2].length;n++) {
                 create_row(result.taxen[2][n], "tableTaxen", n + 1);
             }
+            document.getElementById("rowPatient").hidden = false;
+            document.getElementById("rowTaxen").hidden = false;
         });
     }
     if (document.getElementById("btnVerordnung4").hidden === false) {
         btn_verordnung4.addEventListener('click', async function (){
             $("#tablePatient").find("tr:gt(0)").remove();
             $("#tableTaxen").find("tr:gt(0)").remove();
-            create_row(result.patient_data[3], "tablePatient", 1);
+            document.getElementById("patientName").innerHTML = result.patient_data[3].nachname + ", " + result.patient_data[3].vorname;
+            document.getElementById("patientVers").innerHTML = result.patient_data[3].vers_nr;
+            document.getElementById("patientStatus").innerHTML = result.patient_data[3].status + ", " + result.patient_data[3].vorname;
+            document.getElementById("patientGeb").innerHTML = result.patient_data[3].geburtsdatum;
+            document.getElementById("patientStr").innerHTML = result.patient_data[3].strasse;
+            document.getElementById("patientOrt").innerHTML = result.patient_data[3].plz + "  " + result.patient_data[3].ort;
             for (let n=0; n<result.taxen[3].length;n++) {
                 create_row(result.taxen[3][n], "tableTaxen", n + 1);
             }
+            document.getElementById("rowPatient").hidden = false;
+            document.getElementById("rowTaxen").hidden = false;
         });
     }
 }

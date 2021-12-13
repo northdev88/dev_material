@@ -65,7 +65,7 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
                 <div class="card-body p-3 position-relative">
                     <div class="input-group input-group-outline my-3">
                         <label class="form-label">Versichertennummer</label>
-                        <input name="vnr" id="vnr" type="text" class="form-control" form="formPatientData" value="D490545437" required>
+                        <input name="vnr" id="vnr" type="text" class="form-control" form="formPatientData" required>
                     </div>
                 </div>
             </div>
@@ -79,7 +79,7 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
         </div>
     </div>                          <!--ROW mit Buttons-->
     </form>
-    <div class="row mt-4">
+    <div id="rowVerordnung" hidden="true" class="row mt-4">
         <div class="col-lg-4 col-sm-6">
             <div class="card h-100">
                 <div class="card-header pb-0 p-3">
@@ -132,8 +132,8 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
                 </div>
             </div>
         </div>
-    </div>                     <!--ROW mit Rechnungsübersicht und Kopfelemente-->
-    <div class="row mt-4">
+    </div>                     <!--ROW mit Verordnungen und Kopfelemente-->
+    <div id="rowPatient" hidden="true" class="row mt-4">
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
@@ -142,32 +142,32 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
                             <div class="col-lg-3 col-6 text-center">
                                 <div class="border border-light border-1 border-radius-md py-3">
                                     <h6 class="text-primary text-gradient mb-0">Name, Vorname</h6>
-                                    <h4 class="font-weight-bolder" id="patientName">Hans, Müller</h4>
+                                    <h4 class="font-weight-bolder" id="patientName"></h4>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-6 text-center">
                                 <div class="border border-light border-1 border-radius-md py-3">
                                     <h6 class="text-primary text-gradient mb-0">Versichertennummer</h6>
-                                    <h4 class="font-weight-bolder">D490545437</h4>
+                                    <h4 class="font-weight-bolder" id="patientVers"></h4>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-6 text-center mt-4 mt-lg-0">
                                 <div class="border border-light border-1 border-radius-md py-3">
                                     <h6 class="text-primary text-gradient mb-0">Status</h6>
-                                    <h4 class="font-weight-bolder">5</h4>
+                                    <h4 class="font-weight-bolder" id="patientStatus"></h4>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-6 text-center mt-4 mt-lg-0">
                                 <div class="border border-light border-1 border-radius-md py-3">
                                     <h6 class="text-primary text-gradient mb-0">Geburtsdatum</h6>
-                                    <h4 class="font-weight-bolder">15.06.1988</h4>
+                                    <h4 class="font-weight-bolder" id="patientGeb"></h4>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-6 text-center mt-4 mt-lg-0">
                                 <div class="border border-light border-1 border-radius-md py-3">
                                     <h6 class="text-primary text-gradient mb-0">Anschrift</h6>
-                                    <h6 class="font-weight-bolder">Schulstraße 4</h6>
-                                    <h5 class="font-weight-bolder">98597 Breitungen</h5>
+                                    <h6 class="font-weight-bolder" id="patientStr"></h6>
+                                    <h5 class="font-weight-bolder" id="patientOrt"></h5>
 
                                 </div>
                             </div>
@@ -176,8 +176,8 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row mt-4">
+    </div>                      <!--ROW mit Patientendaten-->
+    <div id="rowTaxen" hidden="true" class="row mt-4">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header pb-0 p-3">
@@ -186,47 +186,17 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
                     </div>
                 </div>
                 <div class="card-body p-3">
-                    <table class="table align-items-center mb-0" id="tableTaxen">
-                        <thead>
-                        <tr>
-                            <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Taxe Nr.</th>
-                            <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Positionsnummer</th>
-                            <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Faktor</th>
-                            <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Preis / €</th>
-                            <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Zuzahlung / €</th>
-                            <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">AC : TK</th>
-                            <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Behandlungsdatum</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>                     <!--ROW mit Patientendaten-->
-    <div class="row mt-4">
-        <div class="col-lg-12">
-            <div class="card h-100">
-                <div class="card-header pb-0 p-3">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="text-primary text-gradient mb-0">Übersicht der Patientendaten</h6>
-                    </div>
-                </div>
-                <div class="card-body p-3">
-                    <div class="table-responsive d-flex justify-content-between">
-                        <table class="table align-items-center mb-0" id="tablePatient">
+                    <div class="table-responsive">
+                        <table class="table align-items-center mb-0" id="tableTaxen">
                             <thead>
                             <tr>
-                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Verordnung Nr.</th>
-                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Versichertennummer</th>
-                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Status</th>
-                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Nachname</th>
-                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Vorname</th>
-                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Geburtsdatum</th>
-                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Straße</th>
-                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">PLZ</th>
-                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Ort</th>
+                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Taxe Nr.</th>
+                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Positionsnummer</th>
+                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Faktor</th>
+                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Preis / €</th>
+                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Zuzahlung / €</th>
+                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">AC : TK</th>
+                                <th class="text-uppercase text-lg-center text-xxs font-weight-bolder opacity-7" scope="col">Behandlungsdatum</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -236,7 +206,7 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
                 </div>
             </div>
         </div>
-</div>
+    </div>                      <!--ROW mit Taxen-->
 </div>
 
 
