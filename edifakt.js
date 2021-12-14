@@ -21,6 +21,8 @@ document.getElementById("formPatientData").onsubmit = async function (event) {
         create_row(result.header, "tableHeader", 1);
         visible_button(result);
         document.getElementById("rowVerordnung").hidden = false;
+        document.getElementById("rowPatient").hidden = true;
+        document.getElementById("rowTaxen").hidden = true;
     }
 }
 
@@ -62,7 +64,7 @@ function visible_button(result) {
             $("#tableTaxen").find("tr:gt(0)").remove();
             document.getElementById("patientName").innerHTML = result.patient_data[0].nachname + ", " + result.patient_data[0].vorname;
             document.getElementById("patientVers").innerHTML = result.patient_data[0].vers_nr;
-            document.getElementById("patientStatus").innerHTML = result.patient_data[0].status + ", " + result.patient_data[0].vorname;
+            document.getElementById("patientStatus").innerHTML = result.patient_data[0].status;
             document.getElementById("patientGeb").innerHTML = result.patient_data[0].geburtsdatum;
             document.getElementById("patientStr").innerHTML = result.patient_data[0].strasse;
             document.getElementById("patientOrt").innerHTML = result.patient_data[0].plz + "  " + result.patient_data[0].ort;
@@ -79,7 +81,7 @@ function visible_button(result) {
             $("#tableTaxen").find("tr:gt(0)").remove();
             document.getElementById("patientName").innerHTML = result.patient_data[1].nachname + ", " + result.patient_data[1].vorname;
             document.getElementById("patientVers").innerHTML = result.patient_data[1].vers_nr;
-            document.getElementById("patientStatus").innerHTML = result.patient_data[1].status + ", " + result.patient_data[1].vorname;
+            document.getElementById("patientStatus").innerHTML = result.patient_data[1].status;
             document.getElementById("patientGeb").innerHTML = result.patient_data[1].geburtsdatum;
             document.getElementById("patientStr").innerHTML = result.patient_data[1].strasse;
             document.getElementById("patientOrt").innerHTML = result.patient_data[1].plz + "  " + result.patient_data[0].ort;
@@ -96,7 +98,7 @@ function visible_button(result) {
             $("#tableTaxen").find("tr:gt(0)").remove();
             document.getElementById("patientName").innerHTML = result.patient_data[2].nachname + ", " + result.patient_data[2].vorname;
             document.getElementById("patientVers").innerHTML = result.patient_data[2].vers_nr;
-            document.getElementById("patientStatus").innerHTML = result.patient_data[2].status + ", " + result.patient_data[2].vorname;
+            document.getElementById("patientStatus").innerHTML = result.patient_data[2].status;
             document.getElementById("patientGeb").innerHTML = result.patient_data[2].geburtsdatum;
             document.getElementById("patientStr").innerHTML = result.patient_data[2].strasse;
             document.getElementById("patientOrt").innerHTML = result.patient_data[2].plz + "  " + result.patient_data[2].ort;
@@ -113,7 +115,7 @@ function visible_button(result) {
             $("#tableTaxen").find("tr:gt(0)").remove();
             document.getElementById("patientName").innerHTML = result.patient_data[3].nachname + ", " + result.patient_data[3].vorname;
             document.getElementById("patientVers").innerHTML = result.patient_data[3].vers_nr;
-            document.getElementById("patientStatus").innerHTML = result.patient_data[3].status + ", " + result.patient_data[3].vorname;
+            document.getElementById("patientStatus").innerHTML = result.patient_data[3].status;
             document.getElementById("patientGeb").innerHTML = result.patient_data[3].geburtsdatum;
             document.getElementById("patientStr").innerHTML = result.patient_data[3].strasse;
             document.getElementById("patientOrt").innerHTML = result.patient_data[3].plz + "  " + result.patient_data[3].ort;

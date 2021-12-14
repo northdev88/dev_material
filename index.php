@@ -91,12 +91,12 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
                 </div>
                 <div class="card-body pb-0 p-3 mt-4">
                     <div id="insertBtn" class="text-center">
-                        <button id="btnVerordnung1" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 1</button>
-                        <button id="btnVerordnung2" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 2</button>
-                        <button id="btnVerordnung3" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 3</button>
-                        <button id="btnVerordnung4" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 4</button>
-                        <button id="btnVerordnung5" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 5</button>
-                        <button id="btnVerordnung6" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 6</button>
+                        <button id="btnVerordnung1" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 1<br><span style="color: black">Kunde 21057</span></button>
+                        <button id="btnVerordnung2" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 2<br><span style="color: black">Kunde 21057</span></button>
+                        <button id="btnVerordnung3" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 3<br><span style="color: black">Kunde 21057</span></button>
+                        <button id="btnVerordnung4" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 4<br><span style="color: black">Kunde 21057</span></button>
+                        <button id="btnVerordnung5" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 5<br><span style="color: black">Kunde 21057</span></button>
+                        <button id="btnVerordnung6" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 6<br><span style="color: black">Kunde 21057</span></button>
                     </div>
                 </div>
                 <div class="card-footer pt-0 pb-0 p-3 d-flex align-items-center">
