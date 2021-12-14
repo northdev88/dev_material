@@ -10,9 +10,11 @@ $GLOBALS['config'] = array(
         'dbname'    => 'arznet',
 
     ),
+    'aok_kz'                => array('2','20','21','22','23','24','25','26','27','28','29','2a',
+                                      '2b','2c','2e','2f','2g','2w','2x','2y','2z'),
     'path_test_esol'        => '/home/norman/Schreibtisch/ESOL0811_short.un',
     'path_new_data'         => '/mnt/new-data',
-    'path_kasse_dbf'        => '/home/norman/Schreibtisch/tmp/kasse.DBF',
+    'path_kasse_dbf'        => '/mnt/new-data/phyorg/STAMM/kasse.DBF',
     'dta302_aok'            => '/mnt/new-data/phyorg/Dtaust/§302HEILMI/aok',
     'dta302_bkk'            => '/mnt/new-data/phyorg/Dtaust/§302HEILMI/bkk',
     'dta302_bund'           => '/mnt/new-data/phyorg/Dtaust/§302HEILMI/bund',

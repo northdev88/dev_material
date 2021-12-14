@@ -1,5 +1,5 @@
 <?php
-$GLOBALS['debug_mode'] = true;
+$GLOBALS['debug_mode'] = false;
 
 require_once("config.inc.php");
 
@@ -11,6 +11,7 @@ class decoder
     public function __construct($rechnungsnummer) {
 
         $this->CONFIG = $GLOBALS['config'];
+
         if ($GLOBALS['debug_mode'] == false) {
            $this->handler = file($this->get_ESOL($rechnungsnummer));
         }
@@ -19,12 +20,11 @@ class decoder
         }
     }
 
-
     public function get_ESOL($rn)
     {
         $rechnungsnummer = explode('-', $rn);
         $month = substr($rechnungsnummer[0], -2);
-        $year  = $rechnungsnummer[2];
+        $year  = substr($rechnungsnummer[2], 0, 2);
         $kassen_kz = $this->get_arzw_kasse_kz($rechnungsnummer[1]);
         switch ($kassen_kz) {
             case 29:
@@ -74,6 +74,7 @@ class decoder
         $data['header'] = array();
         $data['taxen'] = array();
         $match = false;
+        $akt_kunde_ik = '';
         $cnt_patient = 0;
         $cnt_taxe = 0;
         foreach ($this->handler as $segment)
@@ -102,6 +103,11 @@ class decoder
                 ));
             }
             */
+            if ($segment[0] == 'FKT')
+            {
+                $akt_kunde_ik = trim($segment[3]);
+            }
+
             if ($segment[0] == 'INV')
             {
                 if (trim($segment[1]) == trim($patient_number)) {
@@ -112,6 +118,7 @@ class decoder
                     $cnt_patient++;
                     $patient_data = array_merge($patient_data, array(
                         'verornung' => $cnt_patient,
+                        'kunde_ik'  => $akt_kunde_ik,
                         'vers_nr'   => $segment[1],
                         'status'    => $segment[2]
                     ));
@@ -154,7 +161,7 @@ class decoder
     }
 }
 
-//$decoder_handler    = new decoder('juckt keinen da Debug Modus');
-//print_r($decoder_handler->get_patient_data('D490545437'));
+//$decoder_handler    = new decoder('P09-9000501-21');
+//print_r($decoder_handler->get_patient_data('V742483474'));
 //print_r($decoder_handler->get_patient_data('D490545437'));
 //echo json_encode($decoder_handler->get_patient_data('D490545437'));

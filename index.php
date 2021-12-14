@@ -30,6 +30,8 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
     <!-- CSS Files -->
     <link id="pagestyle" href="./assets/css/material-dashboard.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <script src="./assets/js/jquery-3.6.0.min.js"></script>
+    <script src="./assets/js/jquery.inputmask.min.js"></script>
 
 
 </head>
@@ -85,18 +87,19 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
                 <div class="card-header pb-0 p-3">
                     <!--CARD HEADER!-->
                     <div class="d-flex justify-content-between">
-                        <h6 class="text-black-50 mb-0">Auswahl der Verordnung</h6>
+                        <h6 class="text-primary mb-0">Auswahl der Verordnung</h6>
                         </button>
                     </div>
                 </div>
                 <div class="card-body pb-0 p-3 mt-4">
                     <div id="insertBtn" class="text-center">
-                        <button id="btnVerordnung1" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 1<br><span style="color: black">Kunde 21057</span></button>
-                        <button id="btnVerordnung2" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 2<br><span style="color: black">Kunde 21057</span></button>
-                        <button id="btnVerordnung3" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 3<br><span style="color: black">Kunde 21057</span></button>
-                        <button id="btnVerordnung4" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 4<br><span style="color: black">Kunde 21057</span></button>
-                        <button id="btnVerordnung5" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 5<br><span style="color: black">Kunde 21057</span></button>
-                        <button id="btnVerordnung6" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 6<br><span style="color: black">Kunde 21057</span></button>
+                        <h5 class="text-primary" id="errorVerordnung" hidden="true"></h5>
+                        <button id="btnVerordnung1" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 1<br><span id="spanKunde1" style="color: black"></span></button>
+                        <button id="btnVerordnung2" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 2<br><span id="spanKunde2" style="color: black"></span></button>
+                        <button id="btnVerordnung3" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 3<br><span id="spanKunde3" style="color: black"></span></button>
+                        <button id="btnVerordnung4" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 4<br><span id="spanKunde4" style="color: black"></span></button>
+                        <button id="btnVerordnung5" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 5<br><span id="spanKunde5" style="color: black"></span></button>
+                        <button id="btnVerordnung6" type="button" class="btn btn-outline-primary" hidden="true">Verordnung 6<br><span id="spanKunde6" style="color: black"></span></button>
                     </div>
                 </div>
                 <div class="card-footer pt-0 pb-0 p-3 d-flex align-items-center">
@@ -108,7 +111,7 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
             <div class="card">
                 <div class="card-header pb-0 p-3">
                     <div class="d-flex justify-content-between">
-                        <h6 class="text-black-50 mb-0">Übersicht Kopfelement UNB / UNZ</h6>
+                        <h6 class="text-primary mb-0">Übersicht ESOL Kopfelement</h6>
                     </div>
                 </div>
                 <div class="card-body p-3">
@@ -142,32 +145,32 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
                             <div class="col-lg-3 col-6 text-center">
                                 <div class="border border-light border-1 border-radius-md py-3">
                                     <h6 class="text-primary text-gradient mb-0">Name, Vorname</h6>
-                                    <h4 class="font-weight-bolder" id="patientName"></h4>
+                                    <h4><p class="font-weight-bolder" id="patientName" style="text-transform: capitalize"></p></h4>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-6 text-center">
                                 <div class="border border-light border-1 border-radius-md py-3">
                                     <h6 class="text-primary text-gradient mb-0">Versichertennummer</h6>
-                                    <h4 class="font-weight-bolder" id="patientVers"></h4>
+                                    <h4><p class="font-weight-bolder" id="patientVers" style="text-transform: capitalize"></p></h4>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-6 text-center mt-4 mt-lg-0">
                                 <div class="border border-light border-1 border-radius-md py-3">
                                     <h6 class="text-primary text-gradient mb-0">Status</h6>
-                                    <h4 class="font-weight-bolder" id="patientStatus"></h4>
+                                    <h4><p class="font-weight-bolder" id="patientStatus" style="text-transform: capitalize"></p></h4>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-6 text-center mt-4 mt-lg-0">
                                 <div class="border border-light border-1 border-radius-md py-3">
                                     <h6 class="text-primary text-gradient mb-0">Geburtsdatum</h6>
-                                    <h4 class="font-weight-bolder" id="patientGeb"></h4>
+                                    <h4><p class="font-weight-bolder" id="patientGeb" style="text-transform: capitalize"></p></h4>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-6 text-center mt-4 mt-lg-0">
                                 <div class="border border-light border-1 border-radius-md py-3">
                                     <h6 class="text-primary text-gradient mb-0">Anschrift</h6>
-                                    <h6 class="font-weight-bolder" id="patientStr"></h6>
-                                    <h5 class="font-weight-bolder" id="patientOrt"></h5>
+                                    <h6><p class="font-weight-bolder" id="patientStr" style="text-transform: capitalize"></p></h6>
+                                    <h5><p class="font-weight-bolder" id="patientOrt" style="text-transform: capitalize"></p></h5>
 
                                 </div>
                             </div>
@@ -206,8 +209,20 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
                 </div>
             </div>
         </div>
-    </div>                      <!--ROW mit Taxen-->
+    </div> <!--ROW mit Taxen-->
+    <div id="rowSpinner" hidden="true" class="row mt-4">  <!--ROW mit Spinner!-->
+        <div class="d-flex justify-content-center" style="margin-top: 50px">
+            <div class="spinner-grow text-primary" style="margin-right: 20px"></div>
+            <div class="spinner-grow text-primary" style="margin-right: 20px"></div>
+            <div class="spinner-grow text-primary" style="margin-right: 20px"></div>
+            <div class="spinner-grow text-primary" style="margin-right: 20px"></div>
+            <div class="spinner-grow text-primary" style="margin-right: 20px"></div>
+            <div class="spinner-grow text-primary" style="margin-right: 20px"></div>
+        </div>
+    </div>
 </div>
+
+
 
 
 
@@ -215,17 +230,17 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
 <!-------------END CONTENT--------------------------------------------------------------------------------------------->
 <!--   Core JS Files   -->
 
-<script src="/assets/js/jquery-3.6.0.min.js"></script>
-<script src="/assets/js/core/popper.min.js"></script>
 
-<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="./assets/js/core/popper.min.js"></script>
+
+<script src="./assets/js/core/bootstrap.min.js"></script>
 
 <!-- Plugin for the charts, full documentation here: https://www.chartjs.org/ -->
-<script src="/assets/js/plugins/chartjs.min.js"></script>
-<script src="/assets/js/plugins/Chart.extension.js"></script>
+<script src="./assets/js/plugins/chartjs.min.js"></script>
+<script src="./assets/js/plugins/Chart.extension.js"></script>
 
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="/assets/js/material-dashboard.min.js"></script>
+<script src="./assets/js/material-dashboard.min.js"></script>
 <script src="edifakt.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 </body>
