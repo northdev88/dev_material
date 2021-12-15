@@ -20,22 +20,86 @@ class decoder
         }
     }
 
+    public function get_path_esol_heilmi($kassen_kz, $rechnungsnummer) {
+        $month = substr($rechnungsnummer[0], -2);
+        $year  = substr($rechnungsnummer[2], 0, 2);
+        if (substr($kassen_kz, 0, 1) == 2)
+        {
+            $path_esol = $this->CONFIG['dta302_aok'] . "/" . $year . $month . "*/*.un";
+        }
+        else
+        {
+            switch ($kassen_kz) {
+                case 6:
+                    $path_esol = $this->CONFIG['dta302_knapp'] . "/*.un";
+                    break;
+                case 8:
+                    $path_esol = $this->CONFIG['dta302_lkk'] . "/*.un";
+                    break;
+                case 9:
+                    $path_esol = $this->CONFIG['dta302_dak'] . "/*.un";
+                    break;
+                case 1:
+                    $path_esol = $this->CONFIG['dta302_ddg'] . "/*.un";
+                    break;
+                case 30:
+                    $path_esol = $this->CONFIG['dta302_mobil_isc'] . "/*.un";
+                    break;
+                case 33:
+                    $path_esol = $this->CONFIG['dta302_convema'] . "/*.un";
+                    break;
+                case 34:
+                    $path_esol = $this->CONFIG['dta302_condates'] . "/*.un";
+                    break;
+                case 4:
+                    $path_esol = $this->CONFIG['dta302_bkk'] . "/*.un";
+                    break;
+                case 5:
+                    $path_esol = $this->CONFIG['dta302_ikk'] . "/*.un";
+                    break;
+                case 'c':
+                    $path_esol = $this->CONFIG['dta302_bund'] . "/*.un";
+                    break;
+                case 'Ö':
+                    $path_esol = $this->CONFIG['dta302_kv_service'] . "/*.un";
+                    break;
+                case 'r':
+                    $path_esol = $this->CONFIG['dta302_emmend'] . "/*.un";
+                    break;
+                case 'ß':
+                    $path_esol = $this->CONFIG['dta302_mobil_syntela'] . "/*.un";
+                    break;
+                case 'Ä':
+                    $path_esol = $this->CONFIG['dta302_interforum'] . "/AOKN_Ä" . "/*.un";
+                    break;
+                case 'q':
+                    $path_esol = $this->CONFIG['dta302_interforum'] . "/*.un";
+                    break;
+                case 'q1':
+                    $path_esol = $this->CONFIG['dta302_interforum'] . "/DAK_TKK_Q1" . "/*.un";
+                    break;
+                case 'q2':
+                    $path_esol = $this->CONFIG['dta302_interforum'] . "/IKK_Q2" . "/*.un";
+                    break;
+                case 'q3':
+                    $path_esol = $this->CONFIG['dta302_interforum'] . "/BKK_Q3" . "/*.un";
+                    break;
+                case 'q4':
+                    $path_esol = $this->CONFIG['dta302_interforum'] . "/HEK%20Q4" . "/*.un";
+                    break;
+                default:
+                    exit("Fatal Error: Kassenkennzeichen nicht gefunden.");
+            }
+        }
+        return $path_esol;
+    }
+
     public function get_ESOL($rn)
     {
         $rechnungsnummer = explode('-', $rn);
-        $month = substr($rechnungsnummer[0], -2);
-        $year  = substr($rechnungsnummer[2], 0, 2);
         $kassen_kz = $this->get_arzw_kasse_kz($rechnungsnummer[1]);
-        switch ($kassen_kz) {
-            case 29:
-                $path_esol = $this->CONFIG['dta302_aok'] . "/" . $year . $month . "*/*.un";
-                break;
-            case '2c':
-                $path_esol = $this->CONFIG['dta302_aok'] . "/" . $year . $month . "*/*.un";
-                break;
-            default:
-                exit("Fatal Error: Kassenkennzeichen nicht gefunden. Für Kasse $rechnungsnummer[1] wurde folgendens Kennzeichen ermittelt: $kassen_kz");
-        }
+        $path_esol = $this->get_path_esol_heilmi($kassen_kz, $rechnungsnummer);
+        echo $path_esol;
         foreach (glob($path_esol) as $files) {
             $file = file($files);
             foreach ($file as $segment) {
@@ -63,6 +127,7 @@ class decoder
             $cnt++;
             $row = dbase_get_record_with_names($dbase_handler, $cnt);
             if($row['KASSE'] == $kasse) {
+                print_r($row);
                 return trim($row['IKS']);
             }
         }
@@ -110,7 +175,7 @@ class decoder
 
             if ($segment[0] == 'INV')
             {
-                if (trim($segment[1]) == trim($patient_number)) {
+                if (strtolower(trim($segment[1])) == strtolower(trim($patient_number))) {
                     $match = true;
                     $patient_data = array();
                     $taxen_data = array();
@@ -161,7 +226,7 @@ class decoder
     }
 }
 
-//$decoder_handler    = new decoder('P09-9000501-21');
-//print_r($decoder_handler->get_patient_data('V742483474'));
+$decoder_handler    = new decoder('P10-800294-21');
+print_r($decoder_handler->get_patient_data('L700517706'));
 //print_r($decoder_handler->get_patient_data('D490545437'));
 //echo json_encode($decoder_handler->get_patient_data('D490545437'));
