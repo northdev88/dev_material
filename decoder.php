@@ -178,7 +178,7 @@ class decoder
         if (in_array(substr($this->rechnungsnummer[0], 0, 1), array('S', 'O', 'H'))) {
             $path_esol = $this->get_path_esol_himi($kassen_kz);
         }
-        elseif(in_array(substr($this->rechnungsnummer[0], 0, 1), array('P', 'E', 'L'))) {
+        elseif(in_array(substr($this->rechnungsnummer[0], 0, 1), array('P', 'E', 'L', 'N'))) {
             $path_esol = $this->get_path_esol_heilmi($kassen_kz);
         }
         else {
@@ -230,7 +230,7 @@ class decoder
         if (in_array(substr($this->rechnungsnummer[0], 0, 1), array('S', 'O', 'H'))) {
             $ehe_ehi = 'EHI';
         }
-        elseif(in_array(substr($this->rechnungsnummer[0], 0, 1), array('P', 'E', 'L'))) {
+        elseif(in_array(substr($this->rechnungsnummer[0], 0, 1), array('P', 'E', 'L', 'N'))) {
             $ehe_ehi = 'EHE';
         }
         else {
@@ -320,5 +320,5 @@ class decoder
     }
 }
 
-//$decoder_handler    = new decoder('S10-900042-21');
-//print_r($decoder_handler->get_patient_data('N555272892'));
+//$decoder_handler    = new decoder('N01-900120-21');
+//print_r($decoder_handler->get_patient_data('A703547762'));
