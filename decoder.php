@@ -320,5 +320,3 @@ class decoder
     }
 }
 
-//$decoder_handler    = new decoder('N01-900120-21');
-//print_r($decoder_handler->get_patient_data('A703547762'));

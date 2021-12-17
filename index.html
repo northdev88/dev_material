@@ -1,13 +1,3 @@
-<?php
-require_once ("import_edefakt.php");
-/**
- * @var $import_handler
- */
-$import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un");
-//$debug_php = $import_handler->prepare_for_db();
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,9 +30,7 @@ $import_handler = new import_edefakt("/home/norman/Schreibtisch/ESOL0811_org.un"
 <body class="g-sidenav-show bg-gray-100">
 
 <!-------------CONTENT------------------------------------------------------------------------------------------------->
-<!-- <span style="width: 100%" class="badge bg-gradient-success" size="200px"><?//=$server_info?></span>
-<br>
--->
+
 <div class="alert alert-warning" role="alert" hidden="true">
     <p><strong>Debug Ausgabe Javascript</strong></p>
     <p id="pDebug"></p>
